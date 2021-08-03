@@ -1,6 +1,7 @@
 import React, { useRef, useEffect, useState } from "react";
 import env from "react-dotenv";
 import md5 from "md5";
+import styled from 'styled-components'
 
 const Characters = () => {
   const apiPublic = process.env.REACT_APP_PUBLIC_KEY;
@@ -38,11 +39,42 @@ const Characters = () => {
         `${character.thumbnail.extension}`,
       ];
       const newImgString = imgJoin.join("");
+
+      const Container = styled.div`
+        display: flex;
+        flex-direction: column;
+        /* justify-content: center; */
+        align-items: center;
+        width: 100vw;
+        /* padding-left: 5em; */
+        /* height: 100vh; */
+      `;
+      const Name = styled.h1`
+      text-align: center;
+      color: #fff;
+      margin: 0;
+      `
+      const CharacterImg = styled.img`
+      display: inline-block;
+      width: 250px;
+      height: 250px;
+      `
+      const CharacterRow = styled.div`
+      display: flex;
+      width: 90vw;
+      flex-direction: column;
+      justify-content: center;
+      align-items: flex-start;
+      /* height: 10vh; */
+      padding-bottom: 2em;
+      `
       return (
-        <div className="container">
-          <h1 className="title">{character.name}</h1>
-          <img src={newImgString} alt="thumbnail" />
-        </div>
+        <Container className="container">
+          <CharacterRow className="character-info">
+            <CharacterImg src={newImgString} alt="thumbnail" />
+            <Name className="title">{character.name}</Name>
+          </CharacterRow>
+        </Container>
       );
     });
   };
